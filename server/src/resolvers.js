@@ -5,14 +5,13 @@ module.exports = {
       allItems.reverse()
 
       return allItems
-
     },
     item: (_, { id }, { dataSources }) =>
       dataSources.itemAPI.getItemById({ id: id }),
   },
   Mutation: {
-    add: async (_, {id, quantity, pickedUp}, { dataSources }) => {
-      const items = await dataSources.itemAPI.add({id, quantity, pickedUp})
+    add: async (_, {id, quantity}, { dataSources }) => {
+      const items = await dataSources.itemAPI.add({id, quantity})
 
       return {
         success: true,
@@ -28,10 +27,10 @@ module.exports = {
           message: 'failed to remove item',
         }
 
-      const items = await dataSources.itemAPI.getAllitems()
+      const items = await dataSources.itemAPI.getAllItems()
       return {
         success: true,
-        message: 'item removed',
+        message: `item ${id} removed`,
         items: items,
       }
     },
@@ -43,7 +42,7 @@ module.exports = {
           message: 'failed to remove item',
         }
 
-      const items = await dataSources.itemAPI.getAllitems()
+      const items = await dataSources.itemAPI.getAllItems()
       return {
         success: true,
         message: 'item picked up',

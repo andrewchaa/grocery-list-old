@@ -13,12 +13,9 @@ type Query {
 }
 
 type Mutation {
-  add(
-    id: ID!
-    quantity: Int!
-    pickedUp: Boolean!
-    ): ItemsUpdateResponse!
+  add(id: ID!, quantity: Int!): ItemsUpdateResponse!
   pickUp(id: ID!): ItemsUpdateResponse!
+  update(id: ID!, quantity: Int!, pickedUp: Boolean!): ItemsUpdateResponse!
   remove(id: ID!): ItemsUpdateResponse
 }
 
