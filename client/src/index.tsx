@@ -4,11 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient,
+  InMemoryCache,
+  NormalizedCacheObject,
+  ApolloProvider,
+  gql
+} from '@apollo/client';
 
-const client = new ApolloClient({
-  uri: 'https://flyby-gateway.herokuapp.com/',
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
+  uri: 'http://localhost:4000/graphql',
 })
 
 const root = ReactDOM.createRoot(
@@ -28,3 +33,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
