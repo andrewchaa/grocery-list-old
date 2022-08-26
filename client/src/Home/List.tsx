@@ -1,15 +1,6 @@
 import React from 'react'
-import { gql, useQuery } from '@apollo/client'
-
-const GET_GROCERIES = gql`
-  query groceries {
-    items {
-      id
-      quantity
-      pickedUp
-    }
-  }
-`
+import { useQuery } from '@apollo/client'
+import { GET_GROCERIES } from '../gqls'
 
 export default function List() {
   const { loading, error, data } = useQuery(GET_GROCERIES)
