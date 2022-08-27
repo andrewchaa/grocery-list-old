@@ -2,27 +2,25 @@ const {gql} = require('apollo-server');
 
 const typeDefs = gql`
 type Item {
-  id: ID!
+  name: ID!
   quantity: Int!
   pickedUp: Boolean!
 }
 
 type Query {
   items: [Item]!
-  item(id: ID!): Item
+  item(name: ID!): Item
 }
 
 type Mutation {
-  add(id: ID!, quantity: Int!): ItemsUpdateResponse!
-  pickUp(id: ID!): ItemsUpdateResponse!
-  update(id: ID!, quantity: Int!, pickedUp: Boolean!): ItemsUpdateResponse!
-  remove(id: ID!): ItemsUpdateResponse
+  add(name: ID!, quantity: Int!): ItemsUpdateResponse!
+  update(name: ID!, quantity: Int!, pickedUp: Boolean!): ItemsUpdateResponse!
+  remove(name: ID!): ItemsUpdateResponse
 }
 
 type ItemsUpdateResponse {
   success: Boolean!
   message: String
-  items: [Item]
-}`;
+}`
 
 module.exports = typeDefs;

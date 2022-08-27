@@ -1,7 +1,7 @@
-const { DataSource } = require('apollo-datasource');
+const { DataSource } = require('apollo-datasource')
 
 const allItems = [{
-  id: 'banana tree',
+  name: 'banana tree',
   quantity: 1,
   pickedUp: false,
 }]
@@ -11,33 +11,45 @@ class ItemAPI extends DataSource {
     return allItems
   }
 
-  getItemById({id}) {
-    return allItems.find(item => item.id === id);
+  getItemById({name}) {
+    return allItems.find(item => item.name === name)
   }
 
-  add({id, quantity}) {
-    const item = this.getItemById({id});
+  add({name, quantity}) {
+    const item = this.getItemById({name})
     if (item) {
       item.quantity += quantity
     } else {
       allItems.push({
-        id,
+        name,
         quantity,
         pickedUp: false,
-      });
+      })
     }
     return allItems
   }
 
-  remove({id}) {
-    const item = this.getItemById({id});
+  remove({name}) {
+    const item = this.getItemById({name})
     if (!item) {
-      return false;
+      return false
     }
 
     allItems.splice(allItems.indexOf(item), 1)
     return true
   }
+
+  update({name, quantity, pickedUp}) {
+    const item = this.getItemById({name})
+    if (!item) {
+      return false
+    }
+
+    item.name = name
+    item.quantity = quantity
+    item.pickedUp = pickedUp
+    return true
+  }
 }
 
-module.exports = ItemAPI;
+module.exports = ItemAPI

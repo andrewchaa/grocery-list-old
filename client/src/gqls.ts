@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 export const GET_GROCERIES = gql`
   query groceries {
     items {
-      id
+      name
       quantity
       pickedUp
     }
@@ -11,12 +11,8 @@ export const GET_GROCERIES = gql`
 `
 
 export const ADD_GROCERY = gql`
-  mutation add($id: ID!, $quantity: Int!) {
-    add(id: $id, quantity: $quantity) {
-      items {
-        id
-        quantity
-      }
+  mutation add($name: ID!, $quantity: Int!) {
+    add(name: $name, quantity: $quantity) {
       message
       success
     }

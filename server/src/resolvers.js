@@ -6,49 +6,34 @@ module.exports = {
 
       return allItems
     },
-    item: (_, { id }, { dataSources }) =>
-      dataSources.itemAPI.getItemById({ id: id }),
+    item: (_, { name }, { dataSources }) =>
+      dataSources.itemAPI.getItemById({ name: name }),
   },
   Mutation: {
-    add: async (_, {id, quantity}, { dataSources }) => {
-      const items = await dataSources.itemAPI.add({id, quantity})
+    add: async (_, { name, quantity }, { dataSources }) => {
+      const items = await dataSources.itemAPI.add({ name, quantity })
 
       return {
         success: true,
-        message: 'item added successfully',
-        items
+        message: "item added successfully",
+        items,
       }
     },
-    remove: async (_, { id }, { dataSources }) => {
-      const result = await dataSources.itemAPI.remove({ id })
-      if (!result)
-        return {
-          success: false,
-          message: 'failed to remove item',
-        }
 
-      const items = await dataSources.itemAPI.getAllItems()
+    remove: async (_, { name }, { dataSources }) => {
+      const result = await dataSources.itemAPI.remove({ name })
       return {
-        success: true,
-        message: `item ${id} removed`,
-        items: items,
+        success: result,
+        message: result ? `item ${name} removed` : "failed to remove item",
       }
     },
-    pickUp: async (_, { id }, { dataSources }) => {
-      const result = await dataSources.itemAPI.update({ id, pickedUp: true })
-      if (!result)
-        return {
-          success: false,
-          message: 'failed to remove item',
-        }
 
-      const items = await dataSources.itemAPI.getAllItems()
+    update: async (_, { name, quantity, pickedUp }, { dataSources }) => {
+      const result = await dataSources.itemAPI.update({ name, quantity, pickedUp })
       return {
-        success: true,
-        message: 'item picked up',
-        items: items
+        success: result,
+        message: result ? `item ${name} updated` : 'failed to update item',
       }
     },
   },
-
 }
