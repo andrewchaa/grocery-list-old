@@ -19,3 +19,11 @@ export const ADD_GROCERY = gql`
   }
 `
 
+export const UPDATE_GROCERY = gql`
+  mutation update($name: ID!, $quantity: Int! $pickedUp: Boolean!) {
+    update(name: $name, quantity: $quantity, pickedUp: $pickedUp) {
+      message
+      success
+  }
+}
+`
