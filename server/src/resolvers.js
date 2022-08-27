@@ -2,8 +2,6 @@ module.exports = {
   Query: {
     items: (_, __, { dataSources }) => {
       const allItems = dataSources.itemAPI.getAllItems()
-      allItems.reverse()
-
       return allItems
     },
     item: (_, { name }, { dataSources }) =>
