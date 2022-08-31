@@ -32,6 +32,44 @@ describe('List component', () => {
     expect(await screen.findByText(product)).toBeInTheDocument()
     expect(await screen.findByText(quantity)).toBeInTheDocument()
     expect(screen.getByRole('checkbox')).not.toBeChecked()
+  })
 
+  it('should show a message when there are no groceries', async () => {
+    const getGroceriesMock = {
+      request: {
+        query: GET_GROCERIES,
+      },
+      result: {
+        data: { items: [] },
+      }
+    }
+
+    render(
+      <MockedProvider mocks={[getGroceriesMock]} addTypename={false}>
+        <List />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText('Loading...')).toBeInTheDocument()
+    expect(await screen.findByText('No groceries added yet')).toBeInTheDocument()
+  })
+
+  it('should show an error message when there is an error', async () => {
+    const errorMessage = 'Something went wrong'
+    const getGroceriesMock = {
+      request: {
+        query: GET_GROCERIES,
+      },
+      error: new Error(errorMessage)
+    }
+
+    render(
+      <MockedProvider mocks={[getGroceriesMock]} addTypename={false}>
+        <List />
+      </MockedProvider>
+    )
+
+    expect(await screen.findByText('Loading...')).toBeInTheDocument()
+    expect(await screen.findByText(errorMessage)).toBeInTheDocument()
   })
 })

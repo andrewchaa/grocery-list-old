@@ -8,8 +8,9 @@ export default function List() {
   const { loading, error, data } = useQuery(GET_GROCERIES)
 
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error</p>
+  if (error) return <p>{error.message}</p>
   if (!data) return <p>No data</p>
+  if (data.items.length === 0) return <p>No groceries added yet</p>
 
   return (
     <div>
