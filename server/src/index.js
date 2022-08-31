@@ -4,7 +4,7 @@ const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
 
-const ItemAPI = require('./datasources/item');
+const ItemAPI = require('./datasources/ItemApi');
 
 const server = new ApolloServer({
   context: async () => {},

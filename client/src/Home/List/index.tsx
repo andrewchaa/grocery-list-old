@@ -1,7 +1,8 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_GROCERIES } from '../../gqls'
-import GroceryItem from './GroceryItem'
+import Item from './Item'
+import { GroceryItem } from '../../types'
 
 export default function List() {
   const { loading, error, data } = useQuery(GET_GROCERIES)
@@ -12,10 +13,11 @@ export default function List() {
 
   return (
     <div>
-      {data.items.map(item => (
-        <div className="relative flex items-start mt-2">
+      {data.items.map((item: GroceryItem) => (
+        <div className="relative flex items-start mt-2"
+          key={item.name}>
           <div className="w-full">
-            <GroceryItem item={item} />
+            <Item item={item} />
           </div>
           <div className="justify-items-end text-gray-500 pl-5">
             <div className="items-end ml-8">

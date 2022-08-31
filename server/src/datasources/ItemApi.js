@@ -1,10 +1,6 @@
 const { DataSource } = require('apollo-datasource')
 
-const allItems = [{
-  name: 'banana tree',
-  quantity: 1,
-  pickedUp: false,
-}]
+const allItems = []
 
 class ItemAPI extends DataSource {
   getAllItems() {
